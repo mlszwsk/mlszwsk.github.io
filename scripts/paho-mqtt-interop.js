@@ -1,5 +1,20 @@
 ﻿const mqttAssemblyName = "MqttDashboard";
 
+window.getLocation = function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(window.showPosition);
+    } else {
+        var x = document.getElementById("demo");
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+window.showPosition = function showPosition(position) {
+    var x = document.getElementById("demo");
+    x.innerHTML = "Latitude: " + position.coords.latitude +
+        "<br>Longitude: " + position.coords.longitude;
+}
+
 // https://stackoverflow.com/questions/60494746/blazor-navigation-update-url-without-changing-reloading-page
 window.ChangeUrl = function (url) {
     history.pushState(null, '', url);
