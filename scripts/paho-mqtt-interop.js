@@ -1,4 +1,22 @@
 ﻿const mqttAssemblyName = "MqttDashboard";
+
+// https://stackoverflow.com/questions/60494746/blazor-navigation-update-url-without-changing-reloading-page
+window.ChangeUrl = function (url) {
+    history.pushState(null, '', url);
+}
+
+// https://chrissainty.com/copy-to-clipboard-in-blazor/
+window.clipboardCopy = {
+    copyText: function (codeElement) {
+        navigator.clipboard.writeText(codeElement.textContent).then(function () {
+            alert("Copied to clipboard!");
+        })
+            .catch(function (error) {
+                alert(error);
+            });
+    }
+}
+
 window.mqttFunctions = {
 
     encryptMsg: function (msg) {
