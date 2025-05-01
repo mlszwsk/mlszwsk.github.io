@@ -34,11 +34,11 @@ window.clipboardCopy = {
 
 window.mqttFunctions = {
 
-    encryptMsg: function (msg) {
-        return CryptoJS.AES.encrypt(msg, "Secret Passphrase").toString();
+    encryptMsg: function (msg, passphrase) {
+        return CryptoJS.AES.encrypt(msg, passphrase).toString();
     },
-    decryptMsg: function (encrypted) {
-        return CryptoJS.AES.decrypt(encrypted, "Secret Passphrase").toString(CryptoJS.enc.Utf8);
+    decryptMsg: function (encrypted, passphrase) {
+        return CryptoJS.AES.decrypt(encrypted, passphrase).toString(CryptoJS.enc.Utf8);
     },
 
     createClient: function (wsHost, wsPort, clientId) {
