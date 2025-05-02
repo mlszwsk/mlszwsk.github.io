@@ -2,17 +2,57 @@
 
 window.getLocation = function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(window.showPosition);
+        navigator.geolocation.getCurrentPosition(window.showAddress);
     } else {
         var x = document.getElementById("demo");
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
 
-window.showPosition = function showPosition(position) {
+window.getDemoValue = function getDemoValue() {
+    var x = document.getElementById("demo");
+    return x.innerHTML;
+}
+
+window.topic = "";
+
+window.sendLocation = function sendLocation(topic) {
+    if (navigator.geolocation) {
+        window.topic = topic;
+        navigator.geolocation.getCurrentPosition(window.sendAddress);
+    } else {
+        var x = document.getElementById("demo");
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+window.showLatLong = function showLatLong(position) {
     var x = document.getElementById("demo");
     x.innerHTML = "Latitude: " + position.coords.latitude +
         "<br>Longitude: " + position.coords.longitude;
+}
+
+window.showAddress = function showAddress(position) {
+    var x = document.getElementById("demo");
+
+    // https://stackoverflow.com/questions/66506483/how-to-get-the-address-from-coordinates-with-open-street-maps-api
+    fetch("https://nominatim.openstreetmap.org/search.php?q=" + position.coords.latitude + "," + position.coords.longitude + "&polygon_geojson=1&format=json")
+        .then(response => response.json())
+        .then(j => {
+            x.innerHTML = j[0].display_name;
+        })
+}
+
+window.sendAddress = function sendAddress(position) {
+    var x = document.getElementById("demo");
+
+    // https://stackoverflow.com/questions/66506483/how-to-get-the-address-from-coordinates-with-open-street-maps-api
+    fetch("https://nominatim.openstreetmap.org/search.php?q=" + position.coords.latitude + "," + position.coords.longitude + "&polygon_geojson=1&format=json")
+        .then(response => response.json())
+        .then(j => {
+            x.innerHTML = j[0].display_name;
+            window.mqttFunctions.publish(window.topic, window.mqttFunctions.encryptMsg(x.innerHTML, window.topic + window.topic), 1, true);
+        })
 }
 
 // https://stackoverflow.com/questions/60494746/blazor-navigation-update-url-without-changing-reloading-page
