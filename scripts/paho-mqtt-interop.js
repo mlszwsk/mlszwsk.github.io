@@ -1,5 +1,18 @@
 ﻿const mqttAssemblyName = "MqttDashboard";
 
+window.onscroll = function () {
+    if (window.scrollInfoService != null)
+        window.scrollInfoService.invokeMethodAsync('OnScroll', window.pageYOffset);
+}
+
+window.RegisterScrollInfoService = (scrollInfoService) => {
+    window.scrollInfoService = scrollInfoService;
+}
+
+window.scrollFromTop = function scrollFromTop(fromTop) {
+    window.scrollTo(0, fromTop);
+}
+
 window.getLocation = function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(window.showAddress);
