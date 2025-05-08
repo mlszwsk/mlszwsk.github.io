@@ -94,6 +94,80 @@ window.mqttFunctions = {
         return CryptoJS.AES.decrypt(encrypted, passphrase).toString(CryptoJS.enc.Utf8);
     },
 
+    encrypt2: function (plaintext, keyHex, ivHex) {
+        // Klucz i IV w hex (taki sam jak będziesz używał w openssl do odszyfrowania)
+
+        const key = CryptoJS.enc.Hex.parse(keyHex);
+        const iv = CryptoJS.enc.Hex.parse(ivHex);
+
+        // Szyfrowanie
+        const encrypted = CryptoJS.AES.encrypt(plaintext, key, {
+            iv: iv,
+            mode: CryptoJS.mode.CBC,
+            padding: CryptoJS.pad.Pkcs7
+        });
+
+        // To string base64
+        console.log("Szyfrogram (base64):", encrypted.ciphertext.toString(CryptoJS.enc.Base64));
+
+        // Jeśli potrzebujesz hex:
+        // console.log("Szyfrogram (hex):", encrypted.ciphertext.toString());
+
+        return encrypted.ciphertext.toString(CryptoJS.enc.Base64);
+    },
+
+    decrypt2: function (encryptedBase64, keyHex, ivHex)
+    {
+        //var ciphertext = "79a247e48ac27ed33ca3f1919067fa64";
+        //var key = "6268890F-9B58-484C-8CDC-34F9C6A9";
+        //var iv = "6268890F-9B58-48";
+
+        //var key = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
+        //var iv = "0102030405060708090a0b0c0d0e0f10";
+
+        //var ciphertextWA = CryptoJS.enc.Hex.parse(ciphertext);
+        ////var ciphertextWA = ciphertext;
+
+        //var keyWA = CryptoJS.enc.Utf8.parse(key);
+        //var ivWA = CryptoJS.enc.Utf8.parse(iv);
+        //var ciphertextCP = { ciphertext: ciphertextWA };
+
+        //var decrypted = CryptoJS.AES.decrypt(
+        //    ciphertextCP,
+        //    keyWA,
+        //    { iv: ivWA }
+        //);
+
+        //return decrypted.toString(CryptoJS.enc.Utf8);
+
+
+
+
+        //const encryptedBase64 = "k6yfBmR2Jp7LU3wKk8Tm+Q==";
+
+        // Klucz i IV w hex (takie same jak w openssl)
+
+        // Konwersja do WordArray
+        const key = CryptoJS.enc.Hex.parse(keyHex);
+        const iv = CryptoJS.enc.Hex.parse(ivHex);
+        const encrypted = CryptoJS.enc.Base64.parse(encryptedBase64);
+
+        // Deszyfrowanie
+        const decrypted = CryptoJS.AES.decrypt(
+            { ciphertext: encrypted },
+            key,
+            {
+                iv: iv,
+                mode: CryptoJS.mode.CBC,
+                padding: CryptoJS.pad.Pkcs7
+            }
+        );
+
+        console.log("Odszyfrowany tekst:", decrypted.toString(CryptoJS.enc.Utf8));
+
+        return decrypted.toString(CryptoJS.enc.Utf8);
+    },
+
     createClient: function (wsHost, wsPort, clientId) {
         if (!clientId) {
             clientId = "anonymousclient_" + parseInt(Math.random() * 100, 10);
