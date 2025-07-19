@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "MqttDashboard",
   "resources": {
-    "hash": "sha256-8qmOiuFOT/Nt3R5MKzh1yTjSkxXq16GuPerbihNb3rs=",
+    "hash": "sha256-1Zv36SUcN1Y0df+Xxgd3LA/Jh/7YsqfCdRvZnZ6pvjU=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-hIAgPJ6tTPOUTTCZHGnL98nLHWM29g9a4MwFrGTYuYg="
     },
@@ -9,7 +9,7 @@
       "dotnet.runtime.js": "sha256-FDzrAx2UjG21VHaNZAes6hQGG2S/oq5S2VaFjEBfPgM="
     },
     "wasmNative": {
-      "dotnet.native.wasm": "sha256-5ei+SMhajNyVq1iUngU0jgad5ENZ9rNUuY9TuUV3WRo="
+      "dotnet.native.wasm": "sha256-Rm2m3pw3EFkullqahIoJuDioavwAxKWdIc6NoYfgjjk="
     },
     "coreAssembly": {},
     "assembly": {
@@ -28,7 +28,7 @@
       "Microsoft.Extensions.Primitives.wasm": "sha256-xyqqv0SMCahnrOs+p5QYDHoh/BAYlbNtyjTTpqmRW/g=",
       "Microsoft.JSInterop.wasm": "sha256-VH7jFsP+oEda4WtxR3J9sB4jlM5I5JXdKn7KnphFEIc=",
       "Microsoft.JSInterop.WebAssembly.wasm": "sha256-Tv5EkmGlvSfLMzOUcQMoh+dFCyx7bJsnc6031Mtr5fs=",
-      "MqttDashboard.wasm": "sha256-C/rhdaxixSIfsxaDf0KISxDxpGFmREDJrJmFg7oOluo=",
+      "MqttDashboard.wasm": "sha256-hLjdc5XDioMfPudif6wEWghhwrKNsOS8oPb/Cak1awY=",
       "MQTTnet.wasm": "sha256-QhN3odwKOqLhzgLNSiROqJq8y8A6jnGmPfIB4bBkZrs=",
       "System.Collections.Concurrent.wasm": "sha256-W4usDdpdVznGPvtYi/9aNN/bhSpSAx4HTpTxgx25OTg=",
       "System.Collections.NonGeneric.wasm": "sha256-wf+4mj39HTw+vEXn4VnR2H6uQ0+8Mj4oFuq5SwAykuk=",
